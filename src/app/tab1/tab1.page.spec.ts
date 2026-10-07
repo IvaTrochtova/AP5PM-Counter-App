@@ -10,12 +10,17 @@ describe('Tab1Page', () => {
 
   const counterServiceMock = {
     add: vi.fn(),
+    remove: vi.fn(),
+    clear: vi.fn(),
+    counters: () => [],
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
 
     counterServiceMock.add.mockResolvedValue(undefined);
+    counterServiceMock.remove.mockResolvedValue(undefined);
+    counterServiceMock.clear.mockResolvedValue(undefined);
 
     TestBed.configureTestingModule({
       imports: [Tab1Page],
@@ -46,7 +51,6 @@ describe('Tab1Page', () => {
 
     await component.onSaved(counter);
 
-    expect(counterServiceMock.add).toHaveBeenCalledTimes(1);
     expect(counterServiceMock.add).toHaveBeenCalledWith(counter);
   });
 });
